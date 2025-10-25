@@ -9,47 +9,50 @@ const Landing = () => {
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/5">
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `url(${waveBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        
-        {/* Decorative circles */}
-        <div className="absolute top-20 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        
-        <div className="container-constrained relative z-10 py-20 md:py-32">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              TicketFlow
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              Streamline your workflow with powerful, intuitive ticket management
-            </p>
-            <p className="text-base md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Organize, track, and resolve issues faster. Perfect for teams of all sizes looking to boost productivity and collaboration.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="text-lg px-8">
-                <Link to="/auth/signup">Get Started</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="text-lg px-8">
-                <Link to="/auth/login">Login</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+  {/* Wave background */}
+  <div
+    className="absolute inset-0 opacity-20 z-0"
+    style={{
+      backgroundImage: `url(${waveBackground})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  />
+
+  {/* Decorative circles */}
+  <div className="absolute top-20 right-10 w-64 h-64 bg-primary/80 rounded-full z-10 animate-float-slow" />
+  <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/40 rounded-full z-10 animate-float" />
+
+  {/* Content */}
+  <div className="container-constrained relative z-20 py-20 md:py-32">
+    <div className="max-w-3xl mx-auto text-center">
+      <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        TickBase
+      </h1>
+      <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+        Streamline your workflow with powerful, intuitive ticket management
+      </p>
+      <p className="text-base md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+        Organize, track, and resolve issues faster. Perfect for teams of all sizes looking to boost productivity and collaboration.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button asChild size="lg" className="text-lg px-8">
+          <Link to="/auth/signup">Get Started</Link>
+        </Button>
+        <Button asChild size="lg" variant="outline" className="text-lg px-8">
+          <Link to="/auth/login">Login</Link>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Features Section */}
       <section className="py-20 bg-secondary/30">
         <div className="container-constrained">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose TicketFlow?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose TickBase?</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Everything you need to manage tickets efficiently and effectively
             </p>
@@ -102,7 +105,7 @@ const Landing = () => {
               Ready to Transform Your Workflow?
             </h2>
             <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-              Join thousands of teams already using TicketFlow to manage their tickets efficiently
+              Join thousands of teams already using TickBase to manage their tickets efficiently
             </p>
             <Button asChild size="lg" variant="secondary" className="text-lg px-8">
               <Link to="/auth/signup">Start Free Today</Link>
