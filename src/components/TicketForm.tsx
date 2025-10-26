@@ -56,7 +56,10 @@ const TicketForm = ({ ticket, onSubmit, onCancel }: TicketFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full max-w-lg mx-auto px-4 sm:px-6 md:px-8 py-6 bg-background rounded-2xl shadow-sm space-y-6"
+    >
       <div className="space-y-2">
         <Label htmlFor="title">
           Title <span className="text-destructive">*</span>
@@ -96,7 +99,10 @@ const TicketForm = ({ ticket, onSubmit, onCancel }: TicketFormProps) => {
         <Label htmlFor="status">
           Status <span className="text-destructive">*</span>
         </Label>
-        <Select value={status} onValueChange={(value) => setStatus(value as TicketStatus)}>
+        <Select
+          value={status}
+          onValueChange={(value) => setStatus(value as TicketStatus)}
+        >
           <SelectTrigger id="status" className={errors.status ? 'border-destructive' : ''}>
             <SelectValue placeholder="Select status" />
           </SelectTrigger>
@@ -113,11 +119,11 @@ const TicketForm = ({ ticket, onSubmit, onCancel }: TicketFormProps) => {
         )}
       </div>
 
-      <div className="flex gap-3 justify-end pt-4">
-        <Button type="button" variant="outline" onClick={onCancel}>
+      <div className="flex flex-col sm:flex-row gap-3 justify-end pt-4">
+        <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto">
           Cancel
         </Button>
-        <Button type="submit">
+        <Button type="submit" className="w-full sm:w-auto">
           {ticket ? 'Update Ticket' : 'Create Ticket'}
         </Button>
       </div>

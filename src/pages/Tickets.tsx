@@ -18,7 +18,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Footer from '@/components/Footer';
 import TicketCard from '@/components/TicketCard';
 import TicketForm from '@/components/TicketForm';
-import { Plus, ArrowLeft, LogOut } from 'lucide-react';
+import { Plus, ArrowLeft, LogOut, Menu } from 'lucide-react';
 
 const Tickets = () => {
   const { logout } = useAuth();
@@ -31,6 +31,7 @@ const Tickets = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [ticketToDelete, setTicketToDelete] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('all');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (searchParams.get('create') === 'true') {
@@ -98,17 +99,25 @@ const Tickets = () => {
   return (
     <div className="min-h-screen flex flex-col bg-secondary/30">
       {/* Header */}
-      <header className="bg-card border-b border-border">
-        <div className="container-constrained py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" onClick={() => navigate('/dashboard')}>
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
+      <header className="bg-card border-b border-border sticky top-0 z-30">
+        <div className="container-constrained py-4 px-4 sm:px-6">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            {/* Left Section */}
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/dashboard')}
+                className="flex items-center"
+              >
+                <ArrowLeft className="h-4 w-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Back</span>
               </Button>
-              <h1 className="text-2xl font-bold">Ticket Management</h1>
+              <h1 className="text-xl sm:text-2xl font-bold truncate">Ticket Management</h1>
             </div>
-            <div className="flex items-center gap-2">
+
+            {/* Right Section (Desktop) */}
+            <div className="hidden sm:flex items-center gap-2">
               <Button onClick={() => setIsFormOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
                 New Ticket
@@ -118,15 +127,41 @@ const Tickets = () => {
                 Logout
               </Button>
             </div>
+
+            {/* Mobile Menu Button */}
+            <div className="sm:hidden">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle Menu"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="mt-4 flex flex-col gap-3 sm:hidden">
+              <Button onClick={() => setIsFormOpen(true)}>
+                <Plus className="h-4 w-4 mr-2" />
+                New Ticket
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            </div>
+          )}
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-8 sm:py-12">
         <div className="container-constrained">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-            <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 max-w-2xl mx-auto">
               <TabsTrigger value="all">
                 All ({tickets.length})
               </TabsTrigger>
@@ -204,7 +239,10 @@ const Tickets = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
